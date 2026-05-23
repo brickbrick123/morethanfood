@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import { nav, site } from '../data/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current.startsWith(href);
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-forest/10 bg-cream/90 backdrop-blur-md transition-shadow duration-300"
+>
+  <div class="container-content flex h-[72px] items-center justify-between gap-4">
+    <!-- Brand -->
+    <a
+      href="/"
+      class="group flex items-center gap-3"
+      aria-label={`${site.name} — home`}
+    >
+      <Image
+        src={logo}
+        alt=""
+        width={96}
+        height={96}
+        class="h-11 w-11 rounded-full object-cover ring-1 ring-forest/15"
+        loading="eager"
+      />
+      <span class="flex flex-col leading-none">
+        <span class="font-display text-lg font-700 tracking-tight text-forest sm:text-xl">
+          More Than Food
+        </span>
+        <span class="mt-0.5 hidden text-[11px] font-semibold uppercase tracking-[0.2em] text-ember-600 sm:block">
+          Nonprofit
+        </span>
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'rounded-full px-4 py-2 text-sm font-semibold tracking-tight transition-colors duration-150',
+              isActive(item.href)
+                ? 'bg-forest/10 text-forest'
+                : 'text-ink/70 hover:bg-forest/5 hover:text-forest',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- CTA + mobile toggle -->
+    <div class="flex items-center gap-2">
+      <a href="/donate" class="btn-primary hidden px-6 py-2.5 text-sm sm:inline-flex">
+        Donate
+      </a>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-forest hover:bg-forest/10 lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          id="icon-open"
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+        >
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
+        </svg>
+        <svg
+          id="icon-close"
+          class="hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+        >
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <line x1="6" y1="18" x2="18" y2="6"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-forest/10 bg-cream lg:hidden"
+  >
+    <nav class="container-content flex flex-col gap-1 py-4" aria-label="Mobile">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'rounded-xl px-4 py-3 text-base font-semibold transition-colors',
+              isActive(item.href)
+                ? 'bg-forest/10 text-forest'
+                : 'text-ink/80 hover:bg-forest/5 hover:text-forest',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/donate" class="btn-primary mt-2 w-full"> Donate </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  function setMenu(open: boolean) {
+    if (!menu || !toggle || !iconOpen || !iconClose) return;
+    menu.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    setMenu(!open);
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) setMenu(false);
+  });
+
+  // Elevate header on scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => {
+    if (!header) return;
+    header.classList.toggle('shadow-card', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

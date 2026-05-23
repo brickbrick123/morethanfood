@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    --ring: 240 133 43; /* ember */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    @apply bg-ember/30 text-ink;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgb(var(--ring));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Components
+---------------------------------------------------------------------------- */
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full
+      px-7 py-3.5 text-base font-semibold tracking-tight
+      transition-all duration-200 ease-out
+      focus-visible:outline-offset-4;
+  }
+
+  .btn-primary {
+    @apply btn bg-ember text-ink shadow-card
+      hover:bg-ember-500 hover:-translate-y-0.5 hover:shadow-lift
+      active:translate-y-0;
+  }
+
+  .btn-forest {
+    @apply btn bg-forest text-cream
+      hover:bg-forest-600 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-forest/25 bg-transparent text-forest
+      hover:border-forest hover:bg-forest hover:text-cream;
+  }
+
+  .btn-ghost-light {
+    @apply btn border-2 border-cream/40 bg-transparent text-cream
+      hover:border-cream hover:bg-cream hover:text-forest;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase
+      tracking-[0.18em] text-ember-600;
+  }
+
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase
+      tracking-[0.18em] text-ember-200;
+  }
+
+  /* Form controls */
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-forest-800;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border-2 border-forest/15 bg-paper px-4 py-3
+      text-ink placeholder:text-ink/35
+      transition-colors duration-150
+      focus:border-forest focus:outline-none
+      focus-visible:outline-none;
+  }
+
+  .field-input:focus-visible {
+    outline: none;
+  }
+
+  /* Link underline animation */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-ember transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Photo treatment — makes mixed-quality photos feel intentional */
+  .photo-frame {
+    @apply relative overflow-hidden rounded-3xl bg-forest-100;
+  }
+  .photo-frame img {
+    @apply h-full w-full object-cover transition-transform duration-700 ease-out;
+  }
+  .photo-frame:hover img {
+    @apply scale-105;
+  }
+  /* Subtle warm wash unifies disparate photos */
+  .photo-frame::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 73, 47, 0) 55%,
+      rgba(20, 73, 47, 0.28) 100%
+    );
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Utilities
+---------------------------------------------------------------------------- */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Reveal-on-scroll: starts hidden, JS adds .is-visible */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

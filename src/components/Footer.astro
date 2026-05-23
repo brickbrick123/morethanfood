@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import { nav, site, social } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-forest text-cream">
+  <div class="container-content py-16 sm:py-20">
+    <div class="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-10">
+      <!-- Brand -->
+      <div class="max-w-sm">
+        <a href="/" class="flex items-center gap-3" aria-label={`${site.name} — home`}>
+          <Image
+            src={logo}
+            alt=""
+            width={96}
+            height={96}
+            class="h-12 w-12 rounded-full object-cover ring-1 ring-cream/20"
+          />
+          <span class="font-display text-xl font-700 tracking-tight">
+            More Than Food
+          </span>
+        </a>
+        <p class="mt-5 text-pretty text-cream/70">
+          A nonprofit bringing two disparate communities together through food —
+          the sincerest catalyst to communion.
+        </p>
+        <a href="/donate" class="btn-primary mt-7"> Support our mission </a>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h2 class="text-sm font-700 uppercase tracking-[0.18em] text-ember-200">
+          Explore
+        </h2>
+        <ul class="mt-5 space-y-3">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-cream/75 transition-colors hover:text-cream"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="/donate" class="text-cream/75 transition-colors hover:text-cream">
+              Donate
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h2 class="text-sm font-700 uppercase tracking-[0.18em] text-ember-200">
+          Connect
+        </h2>
+        <ul class="mt-5 space-y-3">
+          <li>
+            <a
+              href={`mailto:${site.email}`}
+              class="break-words text-cream/75 transition-colors hover:text-cream"
+            >
+              {site.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cream/75 transition-colors hover:text-cream"
+            >
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a
+              href={social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cream/75 transition-colors hover:text-cream"
+            >
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <span class="text-cream/75">Venmo {site.venmo}</span>
+          </li>
+        </ul>
+
+        <div class="mt-6 flex items-center gap-3">
+          <a
+            href={social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="More Than Food on Instagram"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 transition-colors hover:bg-ember hover:text-ink"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+            </svg>
+          </a>
+          <a
+            href={social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="More Than Food on LinkedIn"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 transition-colors hover:bg-ember hover:text-ink"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24h-4V8z"></path>
+            </svg>
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            aria-label="Email More Than Food"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 transition-colors hover:bg-ember hover:text-ink"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+              <path d="m3 6 9 7 9-7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col gap-2 border-t border-cream/15 pt-7 text-sm text-cream/55 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} More Than Food, NPO. All rights reserved.</p>
+      <p>Bringing communities together since {site.founded}.</p>
+    </div>
+  </div>
+</footer>

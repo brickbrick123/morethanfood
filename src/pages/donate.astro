@@ -1,0 +1,355 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const presets = [10, 25, 50, 100];
+
+const disclaimers = [
+  'If you would like a receipt or proof of donation, please reach out to us via email at wearemorethanfood@gmail.com.',
+  'All donations are final. No refunds will be issued.',
+  'Donations made through this website are a minimum of $5 and a maximum of $1,000. If you are interested in donating more than the maximum, please reach out via email at wearemorethanfood@gmail.com.',
+];
+---
+
+<BaseLayout
+  title="Donate"
+  description="Support More Than Food. Every dollar becomes a meal, and every meal becomes a connection between two communities."
+>
+  <!-- ================= HEADER ================= -->
+  <section class="bg-forest pb-16 pt-20 sm:pb-20 sm:pt-28">
+    <div class="container-content">
+      <div class="max-w-2xl">
+        <span class="eyebrow-light">
+          <span class="h-px w-7 bg-current opacity-50"></span>
+          We need your support
+        </span>
+        <h1
+          class="mt-6 text-balance font-display text-[2.5rem] font-900 leading-[1.05] tracking-tight text-cream sm:text-6xl"
+        >
+          Every dollar becomes a meal.
+        </h1>
+        <p class="mt-5 text-pretty text-lg leading-relaxed text-cream/75">
+          More Than Food would not be able to exist without the amazing number
+          of contributions we have received so far — we pride ourselves on the
+          selfless individual behind each dollar. When donations come in, we
+          make a difference as soon as possible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DONATE BODY ================= -->
+  <section class="bg-cream py-16 sm:py-24">
+    <div class="container-content">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <!-- Form -->
+        <div class="reveal">
+          <div class="rounded-4xl border border-forest/10 bg-paper p-7 shadow-card sm:p-10">
+            <h2 class="font-display text-2xl font-700 text-forest">
+              Make your donation
+            </h2>
+            <p class="mt-2 text-sm text-ink/60">
+              Tell us about your gift below. We will confirm by email and share
+              how to complete your donation via Venmo.
+            </p>
+
+            <form id="donate-form" class="mt-7 grid gap-5" novalidate>
+              <input type="hidden" name="form_type" value="Donation" />
+              <!-- Honeypot: hidden from users, catches bots -->
+              <div class="hidden" aria-hidden="true">
+                <label
+                  >Leave this field empty
+                  <input type="text" name="company" tabindex="-1" autocomplete="off" />
+                </label>
+              </div>
+
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="field-label" for="first_name">First name</label>
+                  <input
+                    class="field-input"
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    autocomplete="given-name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="field-label" for="last_name">Last name</label>
+                  <input
+                    class="field-input"
+                    id="last_name"
+                    name="last_name"
+                    type="text"
+                    autocomplete="family-name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="field-label" for="email">Email</label>
+                  <input
+                    class="field-input"
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="field-label" for="phone">Phone number</label>
+                  <input
+                    class="field-input"
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="field-label" for="address">Address</label>
+                <input
+                  class="field-input"
+                  id="address"
+                  name="address"
+                  type="text"
+                  autocomplete="street-address"
+                />
+              </div>
+
+              <div>
+                <label class="field-label" for="referral"
+                  >How did you hear about us?</label
+                >
+                <input
+                  class="field-input"
+                  id="referral"
+                  name="referral"
+                  type="text"
+                />
+              </div>
+
+              <!-- Amount -->
+              <div>
+                <span class="field-label">Donation amount</span>
+                <div class="mt-1 flex flex-wrap gap-2" role="group" aria-label="Preset amounts">
+                  {
+                    presets.map((amount) => (
+                      <button
+                        type="button"
+                        class="amount-preset rounded-full border-2 border-forest/15 px-5 py-2 text-sm font-semibold text-forest transition-colors hover:border-forest"
+                        data-amount={amount}
+                      >
+                        ${amount}
+                      </button>
+                    ))
+                  }
+                </div>
+                <div class="mt-3">
+                  <label class="sr-only" for="amount"
+                    >Enter the amount you wish to give</label
+                  >
+                  <div class="relative">
+                    <span
+                      class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-semibold text-ink/50"
+                      >$</span
+                    >
+                    <input
+                      class="field-input pl-8"
+                      id="amount"
+                      name="amount"
+                      type="number"
+                      min="5"
+                      max="1000"
+                      step="1"
+                      inputmode="numeric"
+                      placeholder="Enter an amount (5 – 1,000)"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="field-label" for="comments">Comments</label>
+                <textarea
+                  class="field-input min-h-[110px] resize-y"
+                  id="comments"
+                  name="comments"
+                  rows="4"></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary mt-1 w-full sm:w-auto">
+                <span data-submit-label>Register my donation</span>
+              </button>
+
+              <p
+                id="form-status"
+                class="hidden rounded-xl px-4 py-3 text-sm font-medium"
+                role="status"
+                aria-live="polite"
+              >
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="reveal flex flex-col gap-6" style="transition-delay: 100ms;">
+          <!-- Venmo -->
+          <div class="rounded-4xl bg-forest p-8 text-cream">
+            <h2 class="font-display text-xl font-700">Join the movement</h2>
+            <p class="mt-2 text-pretty text-cream/75">
+              The quickest way to give today is directly through Venmo. Send your
+              gift and you are part of the next meal we serve.
+            </p>
+            <a
+              href={site.venmoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary mt-6 w-full"
+            >
+              Donate via Venmo {site.venmo}
+            </a>
+            <p class="mt-3 text-center text-xs text-cream/55">
+              Opens Venmo in a new tab.
+            </p>
+          </div>
+
+          <!-- Impact -->
+          <div class="rounded-4xl border border-forest/10 bg-paper p-8">
+            <h2 class="font-display text-xl font-700 text-forest">
+              Where your gift goes
+            </h2>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed text-ink/70">
+              <li class="flex gap-3">
+                <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-ember"></span>
+                Fresh, protein-rich ingredients for our breakfast service events.
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-ember"></span>
+                Supplies that help volunteers serve homeless shelters with dignity.
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-ember"></span>
+                Experiences that bring two communities together around one table.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Disclaimers -->
+          <div class="rounded-4xl border border-forest/10 bg-sand/60 p-7">
+            <h2 class="text-sm font-700 uppercase tracking-[0.14em] text-forest">
+              Good to know
+            </h2>
+            <ol class="mt-4 space-y-3 text-sm leading-relaxed text-ink/65">
+              {
+                disclaimers.map((note, i) => (
+                  <li class="flex gap-2.5">
+                    <span class="font-semibold text-ember-600">
+                      {'*'.repeat(i + 1)}
+                    </span>
+                    <span>{note}</span>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('donate-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+    const amountInput = document.getElementById('amount') as HTMLInputElement | null;
+    const presetBtns = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.amount-preset')
+    );
+    const submitBtn = form?.querySelector(
+      'button[type="submit"]'
+    ) as HTMLButtonElement | null;
+    const submitLabel = form?.querySelector('[data-submit-label]');
+
+    const activeClasses = ['border-forest', 'bg-forest', 'text-cream'];
+
+    function clearPresets() {
+      presetBtns.forEach((btn) => btn.classList.remove(...activeClasses));
+    }
+
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        clearPresets();
+        btn.classList.add(...activeClasses);
+        if (amountInput) amountInput.value = btn.dataset.amount || '';
+      });
+    });
+
+    amountInput?.addEventListener('input', clearPresets);
+
+    function setStatus(message: string, ok: boolean) {
+      if (!status) return;
+      status.textContent = message;
+      status.classList.remove('hidden');
+      status.classList.toggle('bg-forest/10', ok);
+      status.classList.toggle('text-forest', ok);
+      status.classList.toggle('bg-ember/15', !ok);
+      status.classList.toggle('text-ember-700', !ok);
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const amount = Number(amountInput?.value);
+      if (!amount || amount < 5 || amount > 1000) {
+        setStatus('Please enter a donation amount between $5 and $1,000.', false);
+        return;
+      }
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitLabel) submitLabel.textContent = 'Sending…';
+
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          form.reset();
+          clearPresets();
+          setStatus(
+            'Thank you. Your donation is registered — check your email for how to complete your gift via Venmo.',
+            true
+          );
+        } else {
+          const body = await res.json().catch(() => ({}));
+          setStatus(
+            body.error ||
+              'Something went wrong. Please email us at wearemorethanfood@gmail.com.',
+            false
+          );
+        }
+      } catch {
+        setStatus(
+          'Could not register your donation. Please email us at wearemorethanfood@gmail.com.',
+          false
+        );
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = 'Register my donation';
+      }
+    });
+  </script>
+</BaseLayout>

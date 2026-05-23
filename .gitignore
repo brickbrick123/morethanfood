@@ -1,0 +1,30 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# environment variables
+.env
+.env.production
+.dev.vars
+
+# cloudflare / wrangler
+.wrangler/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS / editor
+.DS_Store
+.vscode/
+*.local
+
+# office temp / lock files
+~$*

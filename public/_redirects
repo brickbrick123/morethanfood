@@ -1,0 +1,34 @@
+# Cloudflare Pages redirects — old Wix URLs to the new site.
+# Format:  /old-path  /new-path  status
+
+# Home variants
+/home            /                     301
+/home-1          /                     301
+/index           /                     301
+
+# Our Story / About
+/our-story       /about                301
+/story           /about                301
+/about-us        /about                301
+/about-1         /about                301
+
+# Service in Action / gallery
+/gallery         /service-in-action    301
+/service         /service-in-action    301
+/photos          /service-in-action    301
+
+# Contact / get involved
+/contact-us      /contact              301
+/get-involved    /contact              301
+/volunteer       /contact              301
+
+# Donate
+/donate-1        /donate               301
+/give            /donate               301
+/support         /donate               301
+
+# Dropped pages — old hidden London page and the unused Wix store
+/london          /                     301
+/shop            /                     301
+/store           /                     301
+/product-page/*  /                     301
