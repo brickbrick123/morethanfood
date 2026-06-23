@@ -7,8 +7,9 @@ const galleryModules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/images/gallery/*.jpg',
   { eager: true }
 );
+// Sort newest first (higher gallery-NN.jpg numbers = more recent additions).
 const gallery = Object.entries(galleryModules)
-  .sort(([a], [b]) => a.localeCompare(b))
+  .sort(([a], [b]) => b.localeCompare(a))
   .map(([, mod]) => mod.default);
 
 // Pre-render a large version of each photo for the lightbox.
