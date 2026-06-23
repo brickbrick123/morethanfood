@@ -14,16 +14,17 @@ const galleryModules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/images/gallery/*.jpg',
   { eager: true }
 );
+// Sort newest first so recent event photos lead the preview.
 const gallery = Object.entries(galleryModules)
-  .sort(([a], [b]) => a.localeCompare(b))
+  .sort(([a], [b]) => b.localeCompare(a))
   .map(([, mod]) => mod.default);
 const preview = [
   gallery[0],
-  gallery[4],
-  gallery[8],
-  gallery[13],
+  gallery[3],
+  gallery[7],
+  gallery[11],
+  gallery[15],
   gallery[18],
-  gallery[20],
 ].filter(Boolean);
 
 const stats = [
@@ -45,7 +46,7 @@ const stats = [
         alt="More Than Food volunteers gathered together at a community service event"
         widths={[768, 1280, 1920, 2400]}
         sizes="100vw"
-        class="h-full w-full object-cover object-center"
+        class="h-full w-full object-cover object-top"
         loading="eager"
         fetchpriority="high"
       />
