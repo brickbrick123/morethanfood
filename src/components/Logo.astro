@@ -13,19 +13,19 @@ const { class: className = '', ariaHidden = false } = Astro.props;
   aria-hidden={ariaHidden ? 'true' : undefined}
   class={className}
 >
-  <!-- Sun rays — 8 rays at 45° intervals, gap from sun body -->
+  <!-- Sun rays — 8 rays at 45° intervals, spaced out from sun -->
   <g stroke="#D97A3A" stroke-width="5" stroke-linecap="round" fill="none">
-    <line x1="100" y1="53" x2="100" y2="44" />
-    <line x1="108" y1="56" x2="114" y2="50" />
-    <line x1="111" y1="64" x2="120" y2="64" />
-    <line x1="108" y1="72" x2="114" y2="78" />
-    <line x1="100" y1="75" x2="100" y2="84" />
-    <line x1="92" y1="72" x2="86" y2="78" />
-    <line x1="89" y1="64" x2="80" y2="64" />
-    <line x1="92" y1="56" x2="86" y2="50" />
+    <line x1="100" y1="50" x2="100" y2="40" />
+    <line x1="110" y1="54" x2="117" y2="47" />
+    <line x1="114" y1="64" x2="124" y2="64" />
+    <line x1="110" y1="74" x2="117" y2="81" />
+    <line x1="100" y1="78" x2="100" y2="88" />
+    <line x1="90" y1="74" x2="83" y2="81" />
+    <line x1="86" y1="64" x2="76" y2="64" />
+    <line x1="90" y1="54" x2="83" y2="47" />
   </g>
-  <!-- Sun body (smaller) -->
-  <circle cx="100" cy="64" r="7" fill="#D97A3A" />
+  <!-- Sun body -->
+  <circle cx="100" cy="64" r="8" fill="#D97A3A" />
   <!-- Bowl (uses currentColor so it adapts to dark or light backgrounds) -->
   <path
     d="M 48 100 A 52 52 0 0 0 152 100 Z"
