@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="More Than Food">
+  <title>More Than Food</title>
+  <!-- Sun rays -->
   <g stroke="#D97A3A" stroke-width="6" stroke-linecap="round" fill="none">
     <line x1="100" y1="32" x2="100" y2="52" />
     <line x1="68" y1="42" x2="80" y2="56" />
@@ -6,8 +8,10 @@
     <line x1="60" y1="72" x2="74" y2="80" />
     <line x1="140" y1="72" x2="126" y2="80" />
   </g>
+  <!-- Sun body -->
   <circle cx="100" cy="70" r="11" fill="#D97A3A" />
+  <!-- Bowl (uses currentColor so it adapts to dark or light backgrounds) -->
   <path d="M 48 100 A 52 52 0 0 0 152 100 Z"
-        fill="none" stroke="#14492F" stroke-width="10"
+        fill="none" stroke="currentColor" stroke-width="10"
         stroke-linejoin="round" stroke-linecap="round" />
 </svg>

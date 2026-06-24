@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/images/logo.png';
+import Logo from './Logo.astro';
 import { nav, site, social } from '../data/site';
 
 const year = new Date().getFullYear();
@@ -12,13 +11,7 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="max-w-sm">
         <a href="/" class="flex items-center gap-3" aria-label={`${site.name} — home`}>
-          <Image
-            src={logo}
-            alt=""
-            width={96}
-            height={96}
-            class="h-12 w-12 rounded-full object-cover ring-1 ring-cream/20"
-          />
+          <Logo class="h-12 w-12 text-cream" ariaHidden />
           <span class="font-display text-xl font-700 tracking-tight">
             More Than Food
           </span>
